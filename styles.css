@@ -1,0 +1,862 @@
+
+/* ==========================================
+   1. CONFIGURACIÓN GENERAL
+========================================== */
+
+:root {
+    --azul-oscuro: #071827;
+    --azul-fondo: #0b1b2b;
+    --azul-tarjeta: #142b40;
+    --azul-tarjeta-hover: #1d4665;
+    --azul: #2386c9;
+    --azul-claro: #173b58;
+    --azul-medio: #54b5f5;
+
+    --blanco: #ffffff;
+    --texto: #f1f5f9;
+    --gris: #c0ccd8;
+
+    --sombra: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #050f1b;
+    font-family: "DM Sans", sans-serif;
+    color: var(--texto);
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   2. BARRA SUPERIOR Y PROGRESO
+========================================== */
+
+.top-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--azul-oscuro);
+    z-index: 100;
+}
+
+.progress-wrap {
+    position: fixed;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #183149;
+    z-index: 100;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background: var(--azul-medio);
+    transition: width 0.4s ease;
+}
+
+
+/* ==========================================
+   3. CONTENEDOR DE DIAPOSITIVAS
+========================================== */
+
+.deck-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 25px 75px;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    max-height: 750px;
+    animation: aparecer 0.45s ease;
+}
+
+.slide.active {
+    display: block;
+}
+
+.canvas {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+
+/* ==========================================
+   4. ANIMACIONES
+========================================== */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================
+   5. PORTADA
+========================================== */
+
+.cover,
+.thank-page {
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            #163c5d 0%,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #061321,
+            #102c45
+        );
+
+    color: white;
+}
+
+.cover-content,
+.thank-content {
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.cover-kicker,
+.section-kicker {
+    color: #69c2ff;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.cover h1,
+.thank-page h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(48px, 7vw, 82px);
+    line-height: 1.05;
+    margin: 30px 0 15px;
+}
+
+.cover h1 span,
+.thank-page h2 span {
+    color: var(--azul-medio);
+}
+
+.cover-content > p,
+.thank-content > p {
+    color: #d7e5f2;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.cover-author {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.cover-author span {
+    color: #a9bfd2;
+    font-size: 12px;
+}
+
+.cover-author strong,
+.thank-content > strong {
+    font-size: 20px;
+}
+
+.cover-footer {
+    margin-top: 50px;
+    color: #a9bfd2;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   6. DIAPOSITIVAS DE INFORMACIÓN
+========================================== */
+
+.info-page,
+.gallery-page {
+    background: var(--azul-fondo);
+    color: var(--texto);
+    padding-bottom: 30px;
+}
+
+.page-number {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: #8faac2;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.section-head {
+    padding: 65px 65px 0;
+}
+
+.section-head h2 {
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(30px, 4vw, 43px);
+    margin: 18px 0 12px;
+}
+
+.section-head > p {
+    color: var(--gris);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 750px;
+}
+
+
+/* ==========================================
+   7. TARJETAS DE INFORMACIÓN
+========================================== */
+
+.info-card {
+    margin: 35px 65px 0;
+    padding: 28px;
+    background: var(--azul-tarjeta);
+    border-left: 5px solid var(--azul);
+    border-radius: 5px;
+}
+
+.info-card h3,
+.highlight-card h3,
+.two-cards h3 {
+    color: #79c8ff;
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.info-card ul {
+    padding-left: 22px;
+    line-height: 2;
+    color: #e5edf5;
+}
+
+.info-card li {
+    padding-left: 5px;
+    margin-bottom: 5px;
+}
+
+
+/* ==========================================
+   8. TARJETAS DESTACADAS
+========================================== */
+
+.highlight-card {
+    margin: 35px 65px 0;
+    padding: 28px;
+    background: linear-gradient(
+        135deg,
+        #102b44,
+        #173d5b
+    );
+
+    color: white;
+    border-left: 5px solid var(--azul-medio);
+    border-radius: 5px;
+}
+
+.highlight-card h3 {
+    color: white;
+}
+
+.highlight-card p {
+    line-height: 1.7;
+    color: #d7e7f5;
+    margin-top: 10px;
+}
+
+.article-number {
+    display: block;
+    color: #69c2ff;
+    font-family: "Playfair Display", serif;
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+
+/* ==========================================
+   9. DOS TARJETAS
+========================================== */
+
+.two-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 30px 65px 0;
+}
+
+.two-cards article {
+    padding: 24px;
+    background: var(--azul-tarjeta);
+    border-top: 4px solid var(--azul);
+    border-radius: 5px;
+}
+
+.two-cards h3 {
+    color: #79c8ff;
+}
+
+.two-cards p,
+.small-card p {
+    color: #c5d2df;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   10. TARJETA PEQUEÑA Y NOTAS
+========================================== */
+
+.small-card {
+    margin-top: 18px;
+}
+
+.bottom-note {
+    margin: 22px 65px;
+    color: #b5c5d4;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   11. ETIQUETAS DE ACTIVIDADES
+========================================== */
+
+.activity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 25px 65px;
+}
+
+.activity-tags span {
+    background: #173b58;
+    color: #d9efff;
+    border: 1px solid #285b7e;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* ==========================================
+   12. GALERÍA DE IMÁGENES
+========================================== */
+
+.gallery-page .image-placeholder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 30px 65px;
+}
+
+.image-placeholder-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 7px;
+    background: var(--azul-tarjeta);
+    border: 1px solid #29445d;
+    transition: transform 0.3s ease;
+}
+
+.image-placeholder-grid img:hover {
+    transform: scale(1.02);
+}
+
+
+/* ==========================================
+   13. AGRADECIMIENTO
+========================================== */
+
+.thank-content {
+    align-items: center;
+    text-align: center;
+}
+
+.thank-page h2 {
+    font-size: clamp(60px, 9vw, 100px);
+}
+
+.thank-content > p {
+    max-width: 550px;
+}
+
+.thank-content > strong {
+    margin-top: 40px;
+    color: var(--azul-medio);
+}
+
+
+/* ==========================================
+   14. CONTROLES DE NAVEGACIÓN
+========================================== */
+
+.controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 10px 18px;
+    background: #10263a;
+    border-radius: 50px;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    z-index: 200;
+}
+
+.controls button {
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #1b3c57;
+    color: #eaf6ff;
+
+    font-size: 18px;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.controls button:hover {
+    background: #2386c9;
+    color: white;
+    transform: scale(1.08);
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+}
+
+.counter i {
+    color: #8da5b9;
+    font-style: normal;
+}
+
+.control-divider {
+    height: 25px;
+    width: 1px;
+    background: #36516a;
+}
+
+
+/* ==========================================
+   15. VISTA GENERAL
+========================================== */
+
+.overview-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(3, 12, 22, 0.85);
+
+    z-index: 300;
+}
+
+.overview-modal.open {
+    display: flex;
+}
+
+.overview-box {
+    width: 100%;
+    max-width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
+
+    padding: 30px;
+    background: #0b1b2b;
+    color: white;
+
+    border: 1px solid #29445d;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+.overview-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.overview-head span {
+    color: #69c2ff;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.overview-head h2 {
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    margin-top: 5px;
+}
+
+.overview-head button {
+    border: none;
+    background: #1b3c57;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.overview-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 18px;
+    border-radius: 7px;
+    background: #142e45;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.overview-card:hover {
+    background: #1d4665;
+    transform: translateY(-3px);
+}
+
+.overview-card span {
+    color: #69c2ff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.overview-card b {
+    color: #f1f5f9;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   16. MENSAJE TEMPORAL
+========================================== */
+
+.toast {
+    position: fixed;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 12px 20px;
+    background: #173b58;
+    color: white;
+
+    font-size: 13px;
+    border-radius: 30px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    z-index: 400;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+
+/* ==========================================
+   17. RESPONSIVE - TABLETS
+========================================== */
+
+@media (max-width: 900px) {
+
+    .cover-content,
+    .thank-content {
+        padding: 45px;
+    }
+
+    .section-head {
+        padding: 55px 35px 0;
+    }
+
+    .info-card,
+    .highlight-card {
+        margin: 25px 35px 0;
+    }
+
+    .two-cards {
+        margin: 25px 35px 0;
+    }
+
+    .bottom-note,
+    .activity-tags {
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .gallery-page .image-placeholder-grid {
+        margin: 25px 35px;
+    }
+
+}
+
+
+/* ==========================================
+   18. RESPONSIVE - CELULARES
+========================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    .deck-container {
+        padding: 20px 10px 75px;
+    }
+
+    .slide {
+        max-height: none;
+    }
+
+    .canvas {
+        border-radius: 8px;
+    }
+
+    .cover-content,
+    .thank-content {
+        padding: 25px;
+    }
+
+    .cover-kicker,
+    .section-kicker {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .cover h1 {
+        font-size: 48px;
+    }
+
+    .cover-content > p,
+    .thank-content > p {
+        font-size: 14px;
+    }
+
+    .cover-author {
+        margin-top: 35px;
+    }
+
+    .cover-footer {
+        margin-top: 35px;
+        font-size: 9px;
+    }
+
+    .section-head {
+        padding: 45px 20px 0;
+    }
+
+    .section-head h2 {
+        font-size: 30px;
+    }
+
+    .section-head > p {
+        font-size: 13px;
+    }
+
+    .page-number {
+        top: 15px;
+        right: 18px;
+        font-size: 10px;
+    }
+
+    .info-card,
+    .highlight-card {
+        margin: 22px 20px 0;
+        padding: 18px;
+    }
+
+    .info-card h3,
+    .highlight-card h3,
+    .two-cards h3 {
+        font-size: 20px;
+    }
+
+    .info-card ul {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .highlight-card p {
+        font-size: 13px;
+    }
+
+    .article-number {
+        font-size: 45px;
+    }
+
+    .two-cards {
+        grid-template-columns: 1fr;
+        margin: 20px;
+    }
+
+    .two-cards article {
+        padding: 18px;
+    }
+
+    .two-cards p,
+    .small-card p {
+        font-size: 13px;
+    }
+
+    .bottom-note,
+    .activity-tags {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .activity-tags span {
+        font-size: 10px;
+        padding: 8px 12px;
+    }
+
+    .gallery-page .image-placeholder-grid {
+        margin: 20px;
+        gap: 9px;
+    }
+
+    .image-placeholder-grid img {
+        border-radius: 5px;
+    }
+
+    .thank-page h2 {
+        font-size: 60px;
+    }
+
+    .controls {
+        bottom: 12px;
+        gap: 10px;
+        padding: 7px 12px;
+    }
+
+    .controls button {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .overview-box {
+        padding: 20px;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ==========================================
+   19. PANTALLAS DE POCA ALTURA
+========================================== */
+
+@media (max-height: 600px) {
+
+    .deck-container {
+        padding-top: 20px;
+        padding-bottom: 65px;
+    }
+
+    .cover-content,
+    .thank-content {
+        padding: 25px 45px;
+    }
+
+    .cover h1 {
+        margin: 15px 0;
+        font-size: 55px;
+    }
+
+    .cover-author {
+        margin-top: 20px;
+    }
+
+    .cover-footer {
+        margin-top: 20px;
+    }
+
+    .section-head {
+        padding-top: 35px;
+    }
+
+    .info-card,
+    .highlight-card {
+        margin-top: 20px;
+        padding: 18px;
+    }
+
+}
